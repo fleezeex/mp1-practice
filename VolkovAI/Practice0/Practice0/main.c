@@ -5,6 +5,7 @@ int main()
 {
     double x1, y1, r1;
     double x2, y2, r2;
+    double distance;
 
     printf("Input the coordinates of the first circle and its radius. \n");
     scanf("%lf %lf %lf", &x1, &y1, &r1);
@@ -22,19 +23,7 @@ int main()
         return 0;
     }
 
-    double distance;
-    if (x1 == x2)
-    {
-        distance = fabs(y1 - y2);
-    }
-    else if (y1 == y2)
-    {
-        distance = fabs(x1 - x2);
-    }
-    else
-    {
-        distance = sqrt((fabs(x1) + fabs(x2)) * (fabs(x1) + fabs(x2)) + (fabs(y1) + fabs(y2)) * (fabs(y1) + fabs(y2)));
-    }
+    distance = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 
     if (x1 == x2 && y1 == y2 && r1 == r2)
     {
@@ -52,13 +41,13 @@ int main()
     {
         printf("There is one common point (internal touch).");
     }
-    else if ((fabs(r1 - r2) < distance) && (distance < r1 + r2))
-    {
-        printf("There are two common points.");
-    }
-    else if (0 < distance < fabs(r1 - r2))
+    else if (distance < fabs(r1 - r2))
     {
         printf("There are no common points, one circle lies in another.");
+    }
+    else
+    {
+        printf("There are two common points.");
     }
 
     return 0;
