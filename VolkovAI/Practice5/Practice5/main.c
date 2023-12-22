@@ -13,10 +13,20 @@ void merge(wchar_t** names, unsigned long long* sizes, int left, int mid, int ri
 void output(wchar_t** names, unsigned long long* sizes, int numoffiles);
 
 int main() {
+	int num1 = 0;
 	wchar_t** names = (wchar_t*) malloc (BUFFER * sizeof(wchar_t*));
 	unsigned long long* sizes = (unsigned long long*)malloc(BUFFER * sizeof(unsigned long long));
 	int numoffiles = arr_fill(names, sizes);
 	sort(names, sizes, numoffiles);
+
+	do {	
+		printf("Do you want to choose another sort? [1/0]: ");
+		scanf("%d", &num1);
+		if (num1 == 1) {
+			printf("\n");
+			sort(names, sizes, numoffiles);
+		}
+	} while (num1 != 0);
 	free(names);
 	free(sizes);
 	return 0;
@@ -54,7 +64,11 @@ int arr_fill(wchar_t** names, unsigned long long* sizes) {
 }
 
 void sort(wchar_t** names, unsigned long long* sizes, int numoffiles) {
-	int num = 0, num1 = 0;
+	wchar_t** names_copy = (wchar_t*)malloc(BUFFER * sizeof(wchar_t*));
+	unsigned long long* sizes_copy = (unsigned long long*)malloc(BUFFER * sizeof(unsigned long long));
+	memcpy(sizes_copy, sizes, BUFFER * sizeof(wchar_t*));
+	memcpy(names_copy, names, BUFFER * sizeof(unsigned long long));
+	int num = 0;
 	double start = 0;
 	double end = 0;
 	printf("Please select the sorting method: \n1. Insertion sort; \n2. Selection sort; \n3. Merge sort. \n");
@@ -62,26 +76,23 @@ void sort(wchar_t** names, unsigned long long* sizes, int numoffiles) {
 	scanf("%d", &num);
 	if (num == 1) {
 		start = omp_get_wtime();
-		insertion_sort(names, sizes, numoffiles);
+		insertion_sort(names_copy, sizes_copy, numoffiles);
 	}
 	
 	if (num == 2) {
 		start = omp_get_wtime();
-		selection_sort(names, sizes, numoffiles);
+		selection_sort(names_copy, sizes_copy, numoffiles);
 	}
 	if (num == 3) {
 		start = omp_get_wtime();
-		merge_sort(names, sizes, 0, numoffiles);
+		merge_sort(names_copy, sizes_copy, 0, numoffiles);
 	}
 	end = omp_get_wtime();
-	output(names, sizes, numoffiles);
+	output(names_copy, sizes_copy, numoffiles);
 	printf("\nTime: %5.15lf sec.\n", end - start);
-	printf("Do you want to choose another sort? [1/0]: ");
-	scanf("%d", &num1);
-	if (num1 == 1) {
-		printf("\n");
-		sort(names, sizes, numoffiles);
-	}
+	
+	free(names_copy);
+	free(sizes_copy);
 }
 
 void insertion_sort(wchar_t** names, unsigned long long* sizes, int numoffiles) {
@@ -194,7 +205,7 @@ void output(wchar_t** names, unsigned long long* sizes, int numoffiles) {
 			printf("                  Folder\n");
 		}
 		else {
-			printf("           %d bytes\n", sizes[i]);
+			printf("           %llu bytes\n", sizes[i]);
 		}
 	}
 }
