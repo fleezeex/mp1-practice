@@ -1,0 +1,9 @@
+Vector addition: 2.00
+6.00
+8.00
+2.00
+Vector substraction: 0.00
+2.00
+2.00
+2.00
+Vector dotproduct: 24.000000
