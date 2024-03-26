@@ -1,7 +1,3 @@
-Vector addition: 99.00
-35.00
-20.00
-Vector substraction: -9.00
-11.00
-2.00
-Vector dotproduct: 2805.000000
+Vector: 99 35 20 
+Vector: -9 11 2 
+Vector dotproduct: 2805

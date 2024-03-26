@@ -14,6 +14,15 @@ TVector::TVector(int n) {
     this->x = new double [n];
 }
 
+TVector::TVector(const TVector& v)
+{
+    this->n = v.n;
+    this->x = new double[this->n];
+    for (int i = 0; i < this->n; i++)
+    {
+        this->x[i] = v.x[i];
+    }
+}
 
 TVector::~TVector() {
     delete[] this->x;

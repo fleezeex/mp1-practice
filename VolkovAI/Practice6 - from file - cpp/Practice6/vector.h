@@ -10,6 +10,7 @@ struct TVector
     double* x;
     TVector();
     TVector(int n);
+    TVector(const TVector& v);
     ~TVector();
 
     TVector operator + (const TVector&);
