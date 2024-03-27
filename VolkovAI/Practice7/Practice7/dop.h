@@ -18,6 +18,6 @@ typedef struct
 
 
 void read(const char* infilename, City* Cities, int numCities, int numVillages);
-void oblasti(City* Cities, int numCities);
+void oblasti(City* Cities, int numCities, int numVillages);
 
 #endif

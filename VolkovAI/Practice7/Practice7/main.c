@@ -8,18 +8,17 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-    char* infilename = "lol.txt";
+    char* infilename = "test.txt";
     int numCities = 0, numVillages = 0;
 
     numCities = numof(infilename, numCities);
-    City* Cities = malloc(numCities * sizeof *Cities);
     numVillages = numof(infilename, numCities);
-    if (numVillages > 0) {
-        City* Villages = malloc(numVillages * sizeof * Villages);
-    }
+
+    City* Cities = malloc((numCities+numVillages) * sizeof * Cities);
+
     read(infilename, Cities, numCities, numVillages);
 
-    oblasti(Cities, numCities);
+    oblasti(Cities, numCities, numVillages);
 
     free(Cities);
     return 0;
