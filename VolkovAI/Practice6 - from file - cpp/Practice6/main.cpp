@@ -7,13 +7,12 @@ int main(int argc, char** argv) {
     std::ifstream in;
     std::ofstream out;
 
-    char* infilename, * outfilename;
     if (argc < 3) {
         cout << "Incorrect arguments. You haven't input all the arguments." << endl;
         return 1;
     }
-    infilename = argv[1];
-    outfilename = argv[2];
+    char* infilename = argv[1];
+    char* outfilename = argv[2];
     
     TVector v1, v2;
     in.open(infilename);
@@ -23,12 +22,8 @@ int main(int argc, char** argv) {
     std::cout << v1;
     std::cout << v2;
     
-    TVector s = v1 + v2;
-    TVector m = v1 - v2;
-    double d = v1 * v2;
-
     out.open(outfilename);
-    out << s << m << "Vector dotproduct: " << d;
+    out << v1 + v2 << v1 - v2 << "Vector dotproduct: " << v1 * v2;
     out.close();
 
     return 0;

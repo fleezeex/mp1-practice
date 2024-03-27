@@ -52,25 +52,28 @@ TVector TVector::operator- (const TVector& v) {
     return res;
 }
 
-TVector TVector::operator= (const TVector& v) {
-    int i = 0;
+const TVector& TVector::operator= (const TVector& v) {
+    if (this == &v)
+    {
+        return *this;
+    }
     if (this->n != v.n) {
-        throw std::exception("Different length.");
+        delete[] this->x;
+        this->n = v.n;
+        this->x = new double[this->n];
     }
-    TVector res(this->n);
-    for (i; i < this->n; i++) {
-        res.x[i] = v.x[i];
+    for (int i = 0; i < this->n; i++) {
+        this->x[i] = v.x[i];
     }
-    return res;
+    return *this;
 }
 
 double TVector::operator* (const TVector& v) {
     double scalar = 0.0;
-    int i = 0;
     if (this->n != v.n) {
         throw std::exception("Different length.");
     }
-    for (; i < this->n; i++) {
+    for (int i = 0; i < this->n; i++) {
         scalar += this->x[i] * v.x[i];
     }
     return scalar;
