@@ -1,7 +1,9 @@
+#pragma once
 #ifndef DOP_H
 #define DOP_H
 #include <stdlib.h>
 #include <stdio.h>
+
 
 #define buffer_size 170
 
@@ -16,8 +18,6 @@ typedef struct
 } City;
 
 
-
-void read(const char* infilename, City* Cities, int numCities, int numVillages);
-void oblasti(City* Cities, int numCities, int numVillages);
-
+void regions(City* Cities, int numCities, int numVillages);
+int numof(const char* infilename, int numCities, int numVillages, int numCountries);
 #endif

@@ -1,62 +1,9 @@
-#include "dop.h"
+#include "dop2.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
-void read(const char* infilename, City* Cities, int numCities, int numVillages) {
-    FILE* f = fopen(infilename, "r");
-    if (f == NULL) {
-        printf("File not found.");
-        abort();
-    }
-    fscanf(f, "%*[^\n]\n");
-    fscanf(f, "%*[^\n]\n");
-
-    for (int i = 0; i < numCities; i++) {
-        fscanf(f, "%s | %s | %s | %d | %f | %s \n", Cities[i].name, Cities[i].coor1, Cities[i].coor2, &Cities[i].population, &Cities[i].square, Cities[i].region);
-        {
-            for (int a = 0; a < strlen(Cities[i].name); a++) {
-                if (Cities[i].name[a] == '_') {
-                    Cities[i].name[a] = ' ';
-                    break;
-                }
-            }
-            for (int a = 0; a < strlen(Cities[i].region); a++) {
-                if (Cities[i].region[a] == '_') {
-                    Cities[i].region[a] = ' ';
-                    break;
-                }
-            }
-        }
-        printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i].name, Cities[i].coor1, Cities[i].coor2, Cities[i].population, Cities[i].square, Cities[i].region);
-    }
-    if (numVillages > 0) {
-        fscanf(f, "%*[^\n]\n");
-        fscanf(f, "%*[^\n]\n");
-        for (int i = 0; i < numVillages; i++) {
-            fscanf(f, "%s | %s | %s | %d | %f | %s \n", Cities[i+numCities].name, Cities[i + numCities].coor1, Cities[i + numCities].coor2, &Cities[i + numCities].population, &Cities[i + numCities].square, Cities[i + numCities].region);
-            {
-                for (int a = 0; a < strlen(Cities[i + numCities].name); a++) {
-                    if (Cities[i + numCities].name[a] == '_') {
-                        Cities[i + numCities].name[a] = ' ';
-                        break;
-                    }
-                }
-                for (int a = 0; a < strlen(Cities[i + numCities].region); a++) {
-                    if (Cities[i + numCities].region[a] == '_') {
-                        Cities[i + numCities].region[a] = ' ';
-                        break;
-                    }
-                }
-            }
-            printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i + numCities].name, Cities[i + numCities].coor1, Cities[i + numCities].coor2, Cities[i + numCities].population, Cities[i + numCities].square, Cities[i + numCities].region);
-        }
-    }
-    fclose(f);
-
-}
-
-int numof(const char* infilename, int numcities) {
+int numof(const char* infilename, int numCities, int numVillages, int numCountries) {
     int res = 0;
     char garbage[15];
     FILE* f = fopen(infilename, "r");
@@ -64,8 +11,18 @@ int numof(const char* infilename, int numcities) {
         printf("File not found.");
         abort();
     }
-    if (numcities > 0) {
-        for (int i = 0; i < numcities + 2; i++) {
+    if (numCities > 0) {
+        for (int i = 0; i < numCities + 2; i++) {
+            fscanf(f, "%*[^\n]\n");
+        }
+    }
+    if (numVillages > 0) {
+        for (int i = numCities; i < numCities+numVillages + 2; i++) {
+            fscanf(f, "%*[^\n]\n");
+        }
+    }
+    if (numCountries > 0) {
+        for (int i = numCities; i < numCountries + numCities + numVillages + 2; i++) {
             fscanf(f, "%*[^\n]\n");
         }
     }
@@ -74,7 +31,7 @@ int numof(const char* infilename, int numcities) {
     return res;
 }
 
-void oblasti(City* Cities, int numCities, int numVillages) {
+void regions(City* Cities, int numCities, int numVillages) {
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
     char name[buffer_size];
@@ -90,7 +47,7 @@ void oblasti(City* Cities, int numCities, int numVillages) {
             cities_counter++;
         }
     }
-    for (int i = cities_counter; i < cities_counter+numVillages; i++) {
+    for (int i = numCities; i < numCities+numVillages; i++) {
         if (strcmp(Cities[i].region, name) == 0) {
             villages_counter++;
         }
@@ -133,5 +90,5 @@ void oblasti(City* Cities, int numCities, int numVillages) {
     if (villages_counter > 0) {
         printf("Процент сельского населения: %lf%%.\n", (double) villages_population / ((double)cities_population + (double) villages_population));
     }
-    printf("Площадь: %.2f квадратных километров.", square);
+    printf("Площадь: %.2f квадратных километров.\n", square);
 }
