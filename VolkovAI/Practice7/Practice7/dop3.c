@@ -3,6 +3,33 @@
 #include <stdio.h>
 #include <string.h>
 
+void menu(City* Cities, Country* Countries, Continent* Continents, int numCities, int numVillages, int numCountries, int numContinents) {
+    int c;
+    int num = 1000;
+    printf("Справочник географа.\n");
+    printf("Пожалуйста, выберите пункт, о котором бы Вы хотели узнать информацию. \n1. Города/деревни.\n2. Регионы.\n3. Страны.\n4. Материки.\n0. Завершение работы.\nВведите необходимый пункт: ");
+    scanf("%d", &num);
+    while ((c = getchar()) != '\n' && c != EOF);
+    while (num != 0) {
+        if (num == 1) {
+            cities_func(Cities, numCities, numVillages);
+        }
+        if (num == 2) {
+            regions(Cities, numCities, numVillages);
+        }
+        if (num == 3) {
+            countries_func(Cities, Countries, numCities, numVillages, numCountries);
+        }
+        if (num == 4) {
+            continents_func(Cities, Countries, Continents, numCities, numVillages, numCountries, numContinents);
+        }
+        printf("Пожалуйста, выберите пункт, о котором бы Вы хотели узнать информацию: ");
+        while ((c = getchar()) != '\n' && c != EOF);
+        scanf("%d", &num);
+        while ((c = getchar()) != '\n' && c != EOF);
+    }
+}
+
 void read(const char* infilename, City* Cities, Country* Countries, Continent* Continents, int numCities, int numVillages, int numCountries, int numContinents) {
     FILE* f = fopen(infilename, "r");
     if (f == NULL) {
@@ -28,7 +55,7 @@ void read(const char* infilename, City* Cities, Country* Countries, Continent* C
                 }
             }
         }
-        printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i].name, Cities[i].coor1, Cities[i].coor2, Cities[i].population, Cities[i].square, Cities[i].region);
+        ///printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i].name, Cities[i].coor1, Cities[i].coor2, Cities[i].population, Cities[i].square, Cities[i].region);
     }
     if (numVillages > 0) {
         fscanf(f, "%*[^\n]\n");
@@ -49,7 +76,7 @@ void read(const char* infilename, City* Cities, Country* Countries, Continent* C
                     }
                 }
             }
-            printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i + numCities].name, Cities[i + numCities].coor1, Cities[i + numCities].coor2, Cities[i + numCities].population, Cities[i + numCities].square, Cities[i + numCities].region);
+            /// printf("%s | %s | %s | %d | %.1f | %s \n", Cities[i + numCities].name, Cities[i + numCities].coor1, Cities[i + numCities].coor2, Cities[i + numCities].population, Cities[i + numCities].square, Cities[i + numCities].region);
         }
     }
     if (numCountries > 0) {
@@ -110,30 +137,32 @@ void continents_func(City* Cities, Country* Countries, Continent* Continents, in
     float square = 0;
     printf("Пожалуйста, введите название материка: ");
     scanf("%[^\t\n]", &name);
-    for (int a = 0; a < numContinents; a++)
+    for (int a = 0; a < numContinents; a++) {
         if (strcmp(Continents[a].name, name) == 0) {
             for (int b = 0; b < Continents[a].numofcountries; b++) {
-                for (int c = 0; c < numCountries; c++)
+                for (int c = 0; c < numCountries; c++) {
                     if (strcmp(Countries[c].name, Continents[a].countries[b]) == 0) {
                         for (int d = 0; d < Countries[c].numofregions; d++) {
                             for (int e = 0; e < numCities; e++) {
                                 if (strcmp(Cities[e].region, Countries[c].regions[d]) == 0) {
-                                    cities_population += Cities[d].population;
-                                    square += Cities[d].square;
+                                    cities_population += Cities[e].population;
+                                    square += Cities[e].square;
                                 }
                             }
-                            for (int d = numCities; d < numCities + numVillages; d++) {
-                                if (strcmp(Cities[d].region, Countries[b].regions[a]) == 0) {
-                                    villages_population += Cities[d].population;
-                                    square += Cities[d].square;
+                            for (int f = numCities; f < numCities + numVillages; f++) {
+                                if (strcmp(Cities[f].region, Countries[c].regions[d]) == 0) {
+                                    villages_population += Cities[f].population;
+                                    square += Cities[f].square;
                                 }
                             }
                         }
                     }
+                }
             }
         }
+    }
     printf("Площадь: %.2f квадратных километров.\nЧисленность населения: %d человек, из них сельского: %d человек. \n", square, cities_population + villages_population, villages_population);
     if (villages_population > 0) {
-        printf("Процент сельского населения: %lf%%.\n", (double)villages_population / ((double)cities_population + (double)villages_population));
+        printf("Процент сельского населения: %lf%%.\n", ((double)villages_population / ((double)cities_population + (double)villages_population))*100);
     }
 }

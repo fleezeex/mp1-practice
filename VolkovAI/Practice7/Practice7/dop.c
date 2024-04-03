@@ -22,13 +22,29 @@ int numof(const char* infilename, int numCities, int numVillages, int numCountri
         }
     }
     if (numCountries > 0) {
-        for (int i = numCities; i < numCountries + numCities + numVillages + 2; i++) {
+        for (int i = numCities+numVillages; i < numCountries + numCities + numVillages + 2; i++) {
             fscanf(f, "%*[^\n]\n");
         }
     }
     fscanf(f, "%s %d", garbage, &res);
     fclose(f);
     return res;
+}
+
+void cities_func(City* Cities, int numCities, int numVillages) {
+    SetConsoleOutputCP(1251);
+    SetConsoleCP(1251);
+    char name[buffer_size];
+    printf("Пожалуйста, введите название города/деревни: ");
+    scanf("%[^\t\n]", &name);
+    for (int i = 0; i < numCities+numVillages; i++) {
+        if (strcmp(Cities[i].name, name) == 0) {
+            printf("Координаты: %s %s\n", Cities[i].coor1, Cities[i].coor2);
+            printf("Население: %d человек\n", Cities[i].population);
+            printf("Площадь: %f квадратных километров.\n", Cities[i].square);
+            printf("Регион: %s\n", Cities[i].region);
+        }
+    }
 }
 
 void regions(City* Cities, int numCities, int numVillages) {

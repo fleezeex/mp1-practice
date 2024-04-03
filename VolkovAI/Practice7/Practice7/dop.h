@@ -17,7 +17,7 @@ typedef struct
     char region[buffer_size];
 } City;
 
-
+void cities_func(City* Cities, int numCities, int numVillages);
 void regions(City* Cities, int numCities, int numVillages);
 int numof(const char* infilename, int numCities, int numVillages, int numCountries);
 #endif

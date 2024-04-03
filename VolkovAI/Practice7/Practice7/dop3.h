@@ -16,4 +16,5 @@ typedef struct
 
 void read(const char* infilename, City* Cities, Country* Countries, Continent *Continents, int numCities, int numVillages, int numCountries, int numContinents);
 void continents_func(City* Cities, Country* Countries, Continent* Continents, int numCities, int numVillages, int numCountries, int numContinents);
+void menu(City* Cities, Country* Countries, Continent* Continents, int numCities, int numVillages, int numCountries, int numContinents);
 #endif

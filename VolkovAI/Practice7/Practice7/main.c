@@ -23,12 +23,13 @@ int main()
 
     read(infilename, Cities, Countries, Continents, numCities, numVillages, numCountries, numContinents);
 
-    for (int i = 0; i < numCountries; i++) {
+    /* for (int i = 0; i < numCountries; i++) {
         for (int a = 0; a < Countries[i].numofregions; a++) {
             printf("%s ", Countries[i].regions[a]);
         }
         printf("\n");
     }
+    */
 
     ///regions(Cities, numCities, numVillages);
 
@@ -38,7 +39,7 @@ int main()
 
     ///while ((c = getchar()) != '\n' && c != EOF);
 
-    continents_func(Cities, Countries, Continents, numCities, numVillages, numCountries, numContinents);
+    menu(Cities, Countries, Continents, numCities, numVillages, numCountries, numContinents);
 
     free(Cities);
     free(Countries);

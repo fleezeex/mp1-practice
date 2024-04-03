@@ -28,10 +28,11 @@ void countries_func(City* Cities, Country* Countries, int numCities, int numVill
                     }
                 }
             }
+            printf("Столица: %s\n", Countries[i].capital);
         }
     }
     printf("Площадь: %.2f квадратных километров.\nЧисленность населения: %d человек, из них сельского: %d человек. \n", square, cities_population + villages_population, villages_population);
     if (villages_population > 0) {
-        printf("Процент сельского населения: %lf%%.\n", (double)villages_population / ((double)cities_population + (double)villages_population));
+        printf("Процент сельского населения: %lf%%.\n", ((double)villages_population / ((double)cities_population + (double)villages_population)) * 100);
     }
 }
