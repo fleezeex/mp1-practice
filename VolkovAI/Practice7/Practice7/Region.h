@@ -7,6 +7,7 @@ typedef struct
     char name[buffer_size];
 
     int ncities;
+    int nvillages;
     City* cities;
 
     int population;

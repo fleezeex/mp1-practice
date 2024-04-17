@@ -23,7 +23,7 @@ void menu(City* Cities, Region* Regions, Country* Countries, Continent* Continen
             countries_func(Cities, Countries, numCities, numVillages, numCountries);
         }
         if (num == 4) {
-            continents_func(Countries, Continents, numCities, numVillages, numCountries, numContinents);
+            continents_func(Countries, Continents, numContinents);
         }
         printf("Пожалуйста, выберите пункт, о котором бы Вы хотели узнать информацию: ");
         while ((c = getchar()) != '\n' && c != EOF);

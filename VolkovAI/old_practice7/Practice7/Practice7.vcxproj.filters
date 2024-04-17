@@ -15,39 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="dop.c">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
     <ClCompile Include="main.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Read_func.c">
+    <ClCompile Include="dop2.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Menu_func.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="City.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Region.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Country.c">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Continent.c">
+    <ClCompile Include="dop3.c">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="City.h">
+    <ClInclude Include="dop.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Region.h">
+    <ClInclude Include="dop2.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Country.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Continent.h">
+    <ClInclude Include="dop3.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

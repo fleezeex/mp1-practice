@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "Header.h"
+#include "Continent.h"
 
 int numof(const char* infilename, int numCities, int numVillages, int numRegions, int numCountries) {
     int res = 0;
@@ -53,7 +53,7 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
 
     fscanf(f, "%*[^\n]\n");
     fscanf(f, "%*[^\n]\n");
-    if (numCities + numCities > 0) {
+    if (numCities + numVillages > 0) {
         for (int i = 0; i < numCities + numVillages; i++) {
             num_temp = 0;
             fgets(temp, buffer_size, f);
@@ -106,15 +106,18 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 if (num_temp == 1) {
                     Regions[i].ncities = atoi(buffer);
                 }
-
                 if (num_temp == 2) {
+                    Regions[i].nvillages = atoi(buffer);
+                }
+
+                if (num_temp == 3) {
                     Regions[i].population = 0;
                     cities_temp = 0;
                     strcpy(buffer2, buffer);
                     strcpy(temp2, buffer);
                     char* temp2 = strtok(buffer2, "/");
                     while (temp2 != NULL) {
-                        for (int a = 0; a < numCities+numVillages; a++) {
+                        for (int a = 0; a < numCities + numVillages; a++) {
                             if (strcmp(temp2, Cities[a].name) == 0) {
                                 Regions[i].cities[cities_temp] = Cities[a];
                                 Regions[i].population += Cities[a].population;
@@ -128,15 +131,6 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 num_temp++;
                 buffer = strtok(NULL, "|");
             }
-        }
-        for (int i = 0; i < numRegions; i++) {
-            printf("Region name: %s\n", Regions[i].name);
-            printf("Region ncities: %d\n", Regions[i].ncities);
-            for (int a = 0; a < Regions[i].ncities; a++) {
-                printf("Region.city name: %s\n", Regions[i].cities[a].name);
-            }
-            printf("Region population: %d\n", Regions[i].population);
-            printf("\n");
         }
     }
     if (numCountries > 0) {
@@ -157,13 +151,13 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 }
 
                 if (num_temp == 1) {
-                    if (strcmp(buffer, "Монархия") == 0) {
+                    if (strcmp(buffer, "монархия") == 0) {
                         Countries[i].form = 0;
                     }
-                    if (strcmp(buffer, "Республика") == 0) {
+                    if (strcmp(buffer, "республика") == 0) {
                         Countries[i].form = 1;
                     }
-                    
+
                 }
 
                 if (num_temp == 2) {
@@ -203,18 +197,6 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 num_temp++;
                 buffer = strtok(NULL, "|");
             }
-        }
-        for (int i = 0; i < numCountries; i++) {
-            printf("Countries name: %s\n", Countries[i].name);
-            printf("Countries nregions: %d\n", Countries[i].nregions);
-            for (int a = 0; a < Countries[i].nregions; a++) {
-                printf("Countries.region name: %s\n", Countries[i].regions[a].name);
-            }
-            printf("Countries population: %d\n", Countries[i].population);
-            printf("Countries square: %f\n", Countries[i].square);
-            printf("Countries form: %d\n", Countries[i].form);
-            printf("Countries capital: %s\n", Countries[i].capital.name);
-            printf("\n");
         }
     }
     if (numContinents > 0) {
@@ -258,14 +240,6 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 num_temp++;
                 buffer = strtok(NULL, "|");
             }
-        }
-        for (int i = 0; i < numContinents; i++) {
-            printf("Continent name: %s\n", Continents[i].name);
-            printf("Continents ncontinents: %d\n", Continents[i].ncountries);
-            for (int a = 0; a < Continents[i].ncountries; a++) {
-                printf("Continents.country name: %s\n", Continents[i].countries[a].name);
-            }
-            printf("\n");
         }
     }
     free(buffer);
