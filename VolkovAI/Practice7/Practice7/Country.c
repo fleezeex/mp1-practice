@@ -1,12 +1,12 @@
 #include "Country.h"
 
-void countries_func(City* Cities, Country* Countries, int numCities, int numVillages, int numCountries) {
+void countries_func(City* Cities, Country* Countries, int numCities, int numCountries) {
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
     char name[buffer_size];
-    int villages_population = 0;
     int flag = -1;
     int temp = 0;
+    int cities_population = 0;
     printf("Пожалуйста, введите название страны: ");
     scanf("%[^\t\n]", &name);
     for (int i = 0; i < numCountries; i++) {
@@ -31,15 +31,9 @@ void countries_func(City* Cities, Country* Countries, int numCities, int numVill
                     printf("%s, ", Countries[flag].regions[a]);
                 }
                 temp--;
-    }
-    for (int q = 0; q < Countries[flag].nregions; q++) {
-        for (int a = Countries[flag].regions[q].nvillages; a < Countries[flag].regions[q].ncities + Countries[flag].regions[q].nvillages; a++) {
-            for (int b = numCities; b < numCities + numVillages; b++) {
-                if (strcmp(Countries[flag].regions[q].cities[a].name, Cities[b].name) == 0) {
-                    villages_population += Cities[b].population;
+                for (int b = 0; b < Countries[flag].regions[a].ncities; b++) {
+                    cities_population += Countries[flag].regions[a].cities[b].population;
                 }
-            }
-        }
     }
     if (Countries[flag].form == 0) {
         printf("Форма правления - монархия. \n");
@@ -50,5 +44,5 @@ void countries_func(City* Cities, Country* Countries, int numCities, int numVill
     printf("Столица страны: %s. \n", Countries[flag].capital);
     printf("Площадь страны: %.2f квадратных километров. \n", Countries[flag].square);
     printf("Численность населения: %d человек. \n", Countries[flag].population);
-    printf("Процент городского населения: %lf%%.\n", 100 - ((double)villages_population / ((double)Countries[flag].population)));
+    printf("Процент городского населения: %lf%%.\n", 100 - (double)cities_population / ((double)Countries[flag].population));
 }

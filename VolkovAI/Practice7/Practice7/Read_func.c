@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Continent.h"
 
-int numof(const char* infilename, int numCities, int numVillages, int numRegions, int numCountries) {
+int numof(const char* infilename, int numCities, int numRegions, int numCountries) {
     int res = 0;
     char garbage[20];
     FILE* f = fopen(infilename, "r");
@@ -16,18 +16,13 @@ int numof(const char* infilename, int numCities, int numVillages, int numRegions
             fscanf(f, "%*[^\n]\n");
         }
     }
-    if (numVillages > 0) {
-        for (int i = numCities; i < numCities + numVillages + 2; i++) {
-            fscanf(f, "%*[^\n]\n");
-        }
-    }
     if (numRegions > 0) {
-        for (int i = numCities + numVillages; i < numCities + numVillages + numRegions + 2; i++) {
+        for (int i = numCities; i < numCities + numRegions + 2; i++) {
             fscanf(f, "%*[^\n]\n");
         }
     }
     if (numCountries > 0) {
-        for (int i = numCities + numVillages + numRegions; i < numCities + numVillages + numRegions + numCountries + 2; i++) {
+        for (int i = numCities + numRegions; i < numCities + numRegions + numCountries + 2; i++) {
             fscanf(f, "%*[^\n]\n");
         }
     }
@@ -36,7 +31,7 @@ int numof(const char* infilename, int numCities, int numVillages, int numRegions
     return res;
 }
 
-void read(const char* infilename, City* Cities, Region* Regions, Country* Countries, Continent* Continents, int numCities, int numVillages, int numRegions, int numCountries, int numContinents) {
+void read(const char* infilename, City* Cities, Region* Regions, Country* Countries, Continent* Continents, int numCities, int numRegions, int numCountries, int numContinents) {
     FILE* f = fopen(infilename, "r");
     if (f == NULL) {
         printf("File not found.");
@@ -53,14 +48,10 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
 
     fscanf(f, "%*[^\n]\n");
     fscanf(f, "%*[^\n]\n");
-    if (numCities + numVillages > 0) {
-        for (int i = 0; i < numCities + numVillages; i++) {
+    if (numCities > 0) {
+        for (int i = 0; i < numCities ; i++) {
             num_temp = 0;
             fgets(temp, buffer_size, f);
-            if ((numVillages > 0) && (i == numCities - 1)) {
-                fscanf(f, "%*[^\n]\n");
-                fscanf(f, "%*[^\n]\n");
-            }
             char* buffer = strtok(temp, "|");
             while (buffer != NULL)
             {
@@ -106,21 +97,20 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 if (num_temp == 1) {
                     Regions[i].ncities = atoi(buffer);
                 }
+
                 if (num_temp == 2) {
-                    Regions[i].nvillages = atoi(buffer);
+                    Regions[i].population = atoi(buffer);
                 }
 
                 if (num_temp == 3) {
-                    Regions[i].population = 0;
                     cities_temp = 0;
                     strcpy(buffer2, buffer);
                     strcpy(temp2, buffer);
                     char* temp2 = strtok(buffer2, "/");
                     while (temp2 != NULL) {
-                        for (int a = 0; a < numCities + numVillages; a++) {
+                        for (int a = 0; a < numCities; a++) {
                             if (strcmp(temp2, Cities[a].name) == 0) {
                                 Regions[i].cities[cities_temp] = Cities[a];
-                                Regions[i].population += Cities[a].population;
                                 cities_temp++;
                             }
                         }
@@ -173,11 +163,14 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 }
 
                 if (num_temp == 4) {
-                    Countries[i].nregions = atoi(buffer);
+                    Countries[i].population = atoi(buffer);
                 }
 
                 if (num_temp == 5) {
-                    Countries[i].population = 0;
+                    Countries[i].nregions = atoi(buffer);
+                }
+
+                if (num_temp == 6) {
                     countries_temp = 0;
                     strcpy(buffer2, buffer);
                     strcpy(temp2, buffer);
@@ -186,7 +179,6 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                         for (int a = 0; a < numRegions; a++) {
                             if (strcmp(temp2, Regions[a].name) == 0) {
                                 Countries[i].regions[countries_temp] = Regions[a];
-                                Countries[i].population += Regions[a].population;
                                 countries_temp++;
                             }
                         }

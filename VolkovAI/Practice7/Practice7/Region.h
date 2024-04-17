@@ -7,11 +7,10 @@ typedef struct
     char name[buffer_size];
 
     int ncities;
-    int nvillages;
     City* cities;
 
+    City capital;
     int population;
 } Region;
-
-void regions(Region* Regions, City* Cities, int numCities, int numVillages, int numRegions);
+void regions_func(City* Cities, Region* Regions, int numCities, int numRegions);
 #endif

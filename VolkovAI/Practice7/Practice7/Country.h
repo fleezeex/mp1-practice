@@ -4,22 +4,23 @@
 
 typedef enum
 {
-    Монархия = 0,
-    Республика = 1
+    Monarchy = 0,
+    Republic = 1
 } GovermentForm;
 
 typedef struct
 {
 
     char name[buffer_size];
+    float square;
+    int population;
+    GovermentForm form;       
+    City capital;
 
     int nregions;
     Region* regions;
-
-    float square;
-    int population;
-    GovermentForm form;
-    City capital;
 } Country;
+
+void countries_func(City* Cities, Country* Countries, int numCities, int numCountries);
 
 #endif
