@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{fdf7c90e-e2c6-4733-92d9-1baf904790ed}</ProjectGuid>
-    <RootNamespace>Practice7</RootNamespace>
+    <ProjectGuid>{c59d3bce-1010-40fb-9ddf-3632262a8331}</ProjectGuid>
+    <RootNamespace>temp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,15 +127,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dop.c" />
-    <ClCompile Include="dop2.c" />
-    <ClCompile Include="dop3.c" />
+    <ClCompile Include="City.c" />
+    <ClCompile Include="Continent.c" />
+    <ClCompile Include="Country.c" />
+    <ClCompile Include="Menu_func.c" />
+    <ClCompile Include="Read_func.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Region.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="dop.h" />
-    <ClInclude Include="dop2.h" />
-    <ClInclude Include="dop3.h" />
+    <ClInclude Include="City.h" />
+    <ClInclude Include="Continent.h" />
+    <ClInclude Include="Country.h" />
+    <ClInclude Include="Region.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

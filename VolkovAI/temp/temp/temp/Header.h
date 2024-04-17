@@ -17,13 +17,17 @@ typedef struct
 typedef struct
 {
     char name[buffer_size];
+
+    int ncities;
+    City* cities;
+
     int population;
 } Region;
 
 typedef enum
 {
-    Монархия,
-    Республика
+    Монархия = 0,
+    Республика = 1
 } GovermentForm;
 
 typedef struct
@@ -31,9 +35,8 @@ typedef struct
 
     char name[buffer_size];
 
-    char regions_temp[buffer_size];
-    Region* regions;
     int nregions;
+    Region* regions;
 
     float square;
     int population;
@@ -46,10 +49,11 @@ typedef struct
 {
     char name[buffer_size];
 
-    Country* countries;
     int ncountries;
+    Country* countries;
+    
 } Continent;
 
-void cities_func(City* Cities, int numCities, int numVillages);
-int numof(const char* infilename, int numCities, int numVillages, int numCountries);
+/// void cities_func(City* Cities, int numCities, int numVillages);
+
 #endif
