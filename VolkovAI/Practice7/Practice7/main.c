@@ -5,10 +5,15 @@
 #include "Continent.h"
 
 
-int main()
+int main(int argc, char** argv)
 {
     setlocale(LC_ALL, "Russian");
-    char* infilename = "Input.txt"; // argc, argv
+    char* infilename;
+    if (argc < 2) {
+        printf("Некорректный ввод. Вы не ввели место хранения базы данных.\n");
+        return 1;
+    }
+    infilename = argv[1];
     int numCities = 0, numRegions = 0, numCountries = 0, numContinents = 0;
     int c;
 
