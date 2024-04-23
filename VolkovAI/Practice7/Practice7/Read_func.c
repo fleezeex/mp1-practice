@@ -103,6 +103,14 @@ void read(const char* infilename, City* Cities, Region* Regions, Country* Countr
                 }
 
                 if (num_temp == 3) {
+                    for (int a = 0; a < numCities; a++) {
+                        if (strcmp(buffer, Cities[a].name) == 0) {
+                            Regions[i].capital = Cities[a];
+                        }
+                    }
+                }
+
+                if (num_temp == 4) {
                     cities_temp = 0;
                     strcpy(buffer2, buffer);
                     strcpy(temp2, buffer);

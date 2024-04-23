@@ -37,6 +37,7 @@ void regions_func(City* Cities, Region* Regions, int numCities, int numRegions) 
             }
         }
     }
+    printf("Столица региона: %s.\n", Regions[flag].capital);
     printf("Численность населения: %d человек.\n", Regions[flag].population);
     printf("Процент городского населения: %lf%%.\n", 100 - (double)cities_population / ((double)Regions[flag].population));
 }
