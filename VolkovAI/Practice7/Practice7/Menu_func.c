@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "Continent.h"
+#include "Library.h"
 
-void menu(City* Cities, Region* Regions, Country* Countries, Continent* Continents, int numCities, int numRegions, int numCountries, int numContinents) {
+void menu(Library Lib) {
     int c;
     int num = 1000;
     printf("Справочник географа.\n");
@@ -12,18 +12,18 @@ void menu(City* Cities, Region* Regions, Country* Countries, Continent* Continen
     while ((c = getchar()) != '\n' && c != EOF);
     while (num != 0) {
         if (num == 1) {
-            cities_func(Cities, numCities);
+            cities_func(Lib);
         }
         
         if (num == 2) {
-            regions_func(Cities, Regions, numCities, numRegions);
+            regions_func(Lib);
         }
         
         if (num == 3) {
-            countries_func(Cities, Countries, numCities, numCountries);
+            countries_func(Lib);
         }
         if (num == 4) {
-            continents_func(Countries, Continents, numContinents);
+            continents_func(Lib);
         }
         printf("Пожалуйста, выберите пункт, о котором бы Вы хотели узнать информацию: ");
         while ((c = getchar()) != '\n' && c != EOF);

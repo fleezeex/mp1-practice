@@ -12,5 +12,7 @@ typedef struct
     City capital;
     int population;
 } Region;
-void regions_func(City* Cities, Region* Regions, int numCities, int numRegions);
+
+
+
 #endif

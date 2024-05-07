@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{176552b7-0a30-4177-8242-9ec4182e5df0}</ProjectGuid>
-    <RootNamespace>Practice7</RootNamespace>
+    <ProjectGuid>{583b8ba1-9d2a-4507-bc5b-b90d5bd3ceef}</ProjectGuid>
+    <RootNamespace>Practice7cpp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,20 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="City.c" />
-    <ClCompile Include="Continent.c" />
-    <ClCompile Include="Country.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="Menu_func.c" />
-    <ClCompile Include="Read_func.c" />
-    <ClCompile Include="Region.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="City.h" />
     <ClInclude Include="Continent.h" />
     <ClInclude Include="Country.h" />
     <ClInclude Include="Library.h" />
     <ClInclude Include="Region.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="City.cpp" />
+    <ClCompile Include="Continent.cpp" />
+    <ClCompile Include="Country.cpp" />
+    <ClCompile Include="Library.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Read_Func.cpp" />
+    <ClCompile Include="Region.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

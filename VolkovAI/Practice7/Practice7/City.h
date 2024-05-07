@@ -14,5 +14,4 @@ typedef struct
     int population;
 } City;
 
-void cities_func(City* Cities, int numCities);
 #endif

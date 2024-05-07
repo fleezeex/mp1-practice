@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "Continent.h"
+#include "Library.h"
 
 
 int main(int argc, char** argv)
@@ -17,23 +17,13 @@ int main(int argc, char** argv)
     int numCities = 0, numRegions = 0, numCountries = 0, numContinents = 0;
     int c;
 
-    numCities = numof(infilename, numCities, numRegions, numCountries);
-    numRegions = numof(infilename, numCities, numRegions, numCountries);
-    numCountries = numof(infilename, numCities, numRegions, numCountries);
-    numContinents = numof(infilename, numCities, numRegions, numCountries);
+    Library Lib;
 
-    City* Cities;
-    Region* Regions;
-    Country* Countries;
-    Continent* Continents;
+    read(infilename, &Lib);
 
-    allocateMemory(&Cities, &Regions, &Countries, &Continents, numCities, numRegions, numCountries, numContinents);
+    menu(Lib);
 
-    read(infilename, Cities, Regions, Countries, Continents, numCities, numRegions, numCountries, numContinents);
-
-    menu(Cities, Regions, Countries, Continents, numCities, numRegions, numCountries, numContinents);
-
-    deallocateMemory(Cities, Regions, Countries, Continents, numCities, numRegions, numCountries, numContinents);
+    deallocateMemory(Lib);
 
     return 0;
 }

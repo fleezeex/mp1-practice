@@ -21,6 +21,4 @@ typedef struct
     Region* regions;
 } Country;
 
-void countries_func(City* Cities, Country* Countries, int numCities, int numCountries);
-
 #endif
