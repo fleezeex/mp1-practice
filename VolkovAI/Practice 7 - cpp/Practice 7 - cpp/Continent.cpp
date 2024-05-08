@@ -20,6 +20,22 @@ Continent::Continent(const Continent& continent) {
     }
 }
 
+const Continent& Continent::operator= (const Continent& continent) {
+	if (this == &continent) {
+		return *this;
+	}
+	if (this->ncountries != continent.ncountries) {
+		delete[] this->countries;
+	}
+    this->name = continent.name;
+    this->ncountries = continent.ncountries;
+	this->countries = new Country[this->ncountries];
+	for (int i = 0; i < this->ncountries; i++) {
+		this->countries[i] = continent.countries[i];
+	}
+	return *this;
+}
+
 Continent::~Continent() {
     delete[] this->countries;
 }

@@ -18,14 +18,14 @@ class Region
     Region(const Region& region);
     ~Region();
 
-
+    const Region& operator= (const Region&);
     friend std::ifstream& operator>>(std::ifstream& in, Region& region)
     {
-        char* temp;
+        string temp;
         char* buffer;
-        in >> temp;
+        getline(in, temp);
         
-        buffer = strtok (temp, ";");
+        buffer = strtok(const_cast<char*> (temp.c_str()), ";");
         region.name = buffer;
         buffer = strtok (NULL, ";");
         region.population = atoi(buffer);
@@ -33,6 +33,7 @@ class Region
         region.capital.name = buffer;
         buffer = strtok (NULL, ";");
         region.ncities = atoi(buffer);
+        region.cities = new City[region.ncities];
         return in;
     }
 };

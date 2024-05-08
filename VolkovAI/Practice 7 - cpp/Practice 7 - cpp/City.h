@@ -23,11 +23,11 @@ class City
     const City& operator = (const City&);
     friend std::ifstream& operator>>(std::ifstream& in, City& city)
     {
-        char* temp;
+        string temp;
         char* buffer;
         in >> temp;
         
-        buffer = strtok (temp, ";");
+        buffer = strtok(const_cast<char*> (temp.c_str()), ";");
         city.name = buffer;
         buffer = strtok (NULL, ";");
         city.coor1 = buffer;

@@ -25,6 +25,24 @@ Region::Region(const Region& region) {
 	}
 }
 
+const Region& Region::operator= (const Region& region) {
+	if (region.cities == this->cities) {
+		return *this;
+	}
+	if (this->ncities != region.ncities) {
+			delete[] this->cities;
+	}
+	this->capital = region.capital;
+	this->name = region.name;
+	this->ncities = region.ncities;
+	this->population = region.population;
+	this->cities = new City[this->ncities];
+	for (int i = 0; i < this->ncities; i++) {
+		this->cities[i] = region.cities[i];
+	}
+	return *this;
+}
+
 Region::~Region() {
 	delete[] this->cities;
 }

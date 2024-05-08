@@ -10,7 +10,7 @@ enum class GovermentForm
 
 class Country
 {
-    private:
+    public:
     string name;
 
     float square;
@@ -27,13 +27,15 @@ class Country
     Country(const Country& country);
     ~Country();
 
+    const Country& operator= (const Country&);
+
     friend std::ifstream& operator>>(std::ifstream& in, Country& country)
     {
-        char* temp;
+        string temp;;
         char* buffer;
         in >> temp;
         
-        buffer = strtok (temp, ";");
+        buffer = strtok (const_cast<char*> (temp.c_str()), ";");
         country.name = buffer;
         buffer = strtok (NULL, ";");
         if (buffer == "республика") 
@@ -44,8 +46,11 @@ class Country
         country.capital.name = buffer;
         buffer = strtok (NULL, ";");
         country.square = atof(buffer);
+        buffer = strtok(NULL, ";");
+        country.population = atof(buffer);
         buffer = strtok (NULL, ";");
         country.nregions = atoi(buffer);
+        country.regions = new Region[country.nregions];
         return in;
     }
 };

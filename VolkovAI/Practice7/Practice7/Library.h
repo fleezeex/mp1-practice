@@ -9,10 +9,10 @@ typedef struct
 } Library;
 
 void read(const char* infilename, Library* Lib);
-void menu(Library Lib);
-void deallocateMemory(Library Lib);
-void cities_func(Library Lib);
-void regions_func(Library Lib);
-void countries_func(Library Lib);
-void continents_func(Library Lib);
+void menu(Library Lib); // Library* Lib
+void deallocateMemory(Library Lib); // Library* Lib
+void cities_func(Library Lib); // Library* Lib
+void regions_func(Library Lib); // Library* Lib
+void countries_func(Library Lib); // Library* Lib
+void continents_func(Library Lib); // Library* Lib
 #endif

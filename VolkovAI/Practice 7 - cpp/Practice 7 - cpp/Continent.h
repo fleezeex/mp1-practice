@@ -4,7 +4,7 @@
 
 class Continent
 {
-    private:
+    public:
     string name;
     int ncountries;
     Country* countries;
@@ -15,22 +15,20 @@ class Continent
     Continent(const Continent& continent);
     ~Continent();
 
+    const Continent& operator= (const Continent&);
+
     friend std::ifstream& operator>>(std::ifstream& in, Continent& continent)
     {
         string temp;
         char* buffer;
-        char* name;
-        int ncountries;
        
         in >> temp;
         
         buffer = strtok (const_cast<char*> (temp.c_str()), ";");
-        name = buffer;
+        continent.name = buffer;
         buffer = strtok (NULL, ";");
-        ncountries = atoi(buffer);
-        Continent(name, ncountries);
-        free(buffer);
-        free(name);
+        continent.ncountries = atoi(buffer);
+        continent.countries = new Country[continent.ncountries];
         return in;
     }
 };

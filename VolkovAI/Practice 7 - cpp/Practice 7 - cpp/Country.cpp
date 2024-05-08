@@ -33,6 +33,27 @@ Country::Country(const Country & country) {
 		this->regions[i] = country.regions[i];
 	}
 }
+
+const Country& Country::operator= (const Country& country) {
+	if (this == &country) {
+		return *this;
+	}
+	if (this->nregions != country.nregions) {
+		delete[] this->regions;
+	}
+	this->capital = country.capital;
+	this->form = country.form;
+	this->name = country.name;
+	this->nregions = country.nregions;
+	this->population = country.population;
+	this->square = country.square;
+	this->regions = new Region[this->nregions];
+	for (int i = 0; i < this->nregions; i++) {
+		this->regions[i] = country.regions[i];
+	}
+	return *this;
+}
+
 Country::~Country() {
 	delete[] this->regions;
 }

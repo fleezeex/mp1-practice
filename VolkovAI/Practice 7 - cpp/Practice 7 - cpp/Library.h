@@ -14,13 +14,15 @@ class Library
     Library(const Library& lib);
     ~Library();
 
+    const Library& operator= (const Library&);
+
     friend std::ifstream& operator>>(std::ifstream& in, Library& lib)
     {
         in >> lib.ncontinents;
         if (lib.continents != nullptr) {
             delete[] lib.continents;
         }
-        Library(lib.ncontinents);
+        lib.continents = new Continent[lib.ncontinents];
         return in;
     }
 };
