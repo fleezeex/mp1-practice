@@ -2,22 +2,19 @@
 #define COUNTRY
 #include "Region.h"
 
-enum class GovermentForm
-{
-    Monarchy,
-    Republic
-};
+typedef enum {
+    Monarchy = 0,
+    Republic = 1
+} GovermentForm;
 
 class Country
 {
-    public:
+    private:
     string name;
-
     float square;
     int population;
     GovermentForm form;       
     City capital;
-
     int nregions;
     Region* regions;
 
@@ -27,34 +24,27 @@ class Country
     Country(const Country& country);
     ~Country();
 
+    string get_name() const {
+        return this->name;
+    }
+
+    Region& get_region(int index)  {
+        return regions[index];
+    }
+
+    int get_nregions() const {
+        return this->nregions;
+    }
+
+    int get_population() const {
+        return this->population;
+    }
+
     const Country& operator= (const Country&);
 
-    friend std::ifstream& operator>>(std::ifstream& in, Country& country)
-    {
-        string temp;;
-        char* buffer;
-        in >> temp;
-        
-        buffer = strtok (const_cast<char*> (temp.c_str()), ";");
-        country.name = buffer;
-        buffer = strtok (NULL, ";");
-        if (buffer == "республика") 
-            country.form = GovermentForm::Republic;
-        else if (buffer == "монархия")
-            country.form = GovermentForm::Monarchy;
-        buffer = strtok (NULL, ";");
-        country.capital.name = buffer;
-        buffer = strtok (NULL, ";");
-        country.square = atof(buffer);
-        buffer = strtok(NULL, ";");
-        country.population = atof(buffer);
-        buffer = strtok (NULL, ";");
-        country.nregions = atoi(buffer);
-        country.regions = new Region[country.nregions];
-        return in;
-    }
+    friend std::ifstream& operator>>(std::ifstream& in, Country& country);
+    friend std::ostream& operator<< (std::ostream& out, Country& country);
 };
 
-std::istream& operator>>(std::istream& in, Country& country);
 //void countries_func(Library lib);
 #endif

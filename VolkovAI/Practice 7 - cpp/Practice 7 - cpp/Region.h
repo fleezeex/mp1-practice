@@ -4,40 +4,34 @@
 
 class Region
 {
-    public:
+    private:
     string name;
-
     int ncities;
     City* cities;
-    
     City capital;
     int population;
 
+    public:
     Region();
     Region(string name, int population, string capitalname, int ncities);
     Region(const Region& region);
     ~Region();
 
-    const Region& operator= (const Region&);
-    friend std::ifstream& operator>>(std::ifstream& in, Region& region)
-    {
-        string temp;
-        char* buffer;
-        getline(in, temp);
-        
-        buffer = strtok(const_cast<char*> (temp.c_str()), ";");
-        region.name = buffer;
-        buffer = strtok (NULL, ";");
-        region.population = atoi(buffer);
-        buffer = strtok (NULL, ";");
-        region.capital.name = buffer;
-        buffer = strtok (NULL, ";");
-        region.ncities = atoi(buffer);
-        region.cities = new City[region.ncities];
-        return in;
+    City& get_city(int index)  {
+        return cities[index];
     }
-};
 
-std::istream& operator>>(std::istream& in, Region& region);
+    string get_name() const {
+        return this->name;
+    }
+
+    int get_ncities() const {
+        return this->ncities;
+    }
+
+    const Region& operator= (const Region&);
+    friend std::ifstream& operator>>(std::ifstream& in, Region& region);
+    friend std::ostream& operator<< (std::ostream& out, Region& region);
+};
 //void regions_func(Library lib);
 #endif

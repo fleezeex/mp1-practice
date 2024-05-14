@@ -1,6 +1,6 @@
 #include "Library.h"
 
-void continents_func(Library Lib) {
+void continents_func(Library* Lib) {
     SetConsoleOutputCP(1251);
     SetConsoleCP(1251);
     char name[buffer_size];
@@ -12,20 +12,20 @@ void continents_func(Library Lib) {
     printf("Пожалуйста, введите название континента: ");
     scanf("%[^\t\n]", &name);
 
-    for (a = 0; a < Lib.ncontinents; a++) {
-        if (strcmp(Lib.continents[a].name, name) == 0) {
+    for (a = 0; a < Lib->ncontinents; a++) {
+        if (strcmp(Lib->continents[a].name, name) == 0) {
             flag = b;
-            temp = Lib.continents[a].ncountries;
+            temp = Lib->continents[a].ncountries;
             printf("Страны, входящие в состав страны: ");
-            for (b = 0; b < Lib.continents[a].ncountries; b++) {
+            for (b = 0; b < Lib->continents[a].ncountries; b++) {
                 if (temp == 1) {
-                    printf("%s. \n", Lib.continents[a].countries[b].name);
+                    printf("%s. \n", Lib->continents[a].countries[b].name);
                 }
                 else {
-                    printf("%s, ", Lib.continents[a].countries[b].name);
+                    printf("%s, ", Lib->continents[a].countries[b].name);
                 }
                 temp--;
-                population += Lib.continents[a].countries[b].population;
+                population += Lib->continents[a].countries[b].population;
             }
             printf("Численность населения на континенте: %d человек. \n", population);
         }

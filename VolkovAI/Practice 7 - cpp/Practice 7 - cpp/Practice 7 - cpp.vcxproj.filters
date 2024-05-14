@@ -35,9 +35,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Read_Func.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Continent.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -51,6 +48,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="City.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu_func.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

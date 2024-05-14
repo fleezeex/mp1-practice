@@ -21,9 +21,9 @@ int main(int argc, char** argv)
 
     read(infilename, &Lib);
 
-    menu(Lib);
+    menu(&Lib);
 
-    deallocateMemory(Lib);
+    deallocateMemory(&Lib);
 
     return 0;
 }

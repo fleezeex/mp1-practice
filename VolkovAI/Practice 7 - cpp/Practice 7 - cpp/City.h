@@ -10,35 +10,31 @@ using namespace std;
 class City
 {
     private:
+    string name;
     string coor1;
     string coor2;
     int population;
 
     public:
-    string name;
     City();
     City(string name, string coor1, string coor2, int population);
     City(const City& city);
+
+    void set_name(string name) {
+        this->name = name;
+    }
+    string get_name() const {
+        return this->name;
+    }
+    int get_population() const {
+        return this->population;
+    }
     
     const City& operator = (const City&);
-    friend std::ifstream& operator>>(std::ifstream& in, City& city)
-    {
-        string temp;
-        char* buffer;
-        in >> temp;
-        
-        buffer = strtok(const_cast<char*> (temp.c_str()), ";");
-        city.name = buffer;
-        buffer = strtok (NULL, ";");
-        city.coor1 = buffer;
-        buffer = strtok (NULL, ";");
-        city.coor2 = buffer;
-        buffer = strtok (NULL, ";");
-        city.coor1 = atoi(buffer);
-        return in;
-    }
-};
 
-std::istream& operator>>(std::istream& in, City& city);
-//void cities_func(Library lib);
+    friend std::ifstream& operator>>(std::ifstream& in, City& city);
+    friend std::ostream& operator<< (std::ostream& out, const City& city);
+    
+};
+//
 #endif

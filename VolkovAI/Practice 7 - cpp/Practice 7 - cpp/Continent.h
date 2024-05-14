@@ -4,7 +4,7 @@
 
 class Continent
 {
-    public:
+    private:
     string name;
     int ncountries;
     Country* countries;
@@ -15,24 +15,23 @@ class Continent
     Continent(const Continent& continent);
     ~Continent();
 
+    string get_name() const {
+        return this->name;
+    }
+
+    Country& get_country(int index)  {
+        return countries[index];
+    }
+
+    int get_ncountries() const {
+        return this->ncountries;
+    }
+
     const Continent& operator= (const Continent&);
 
-    friend std::ifstream& operator>>(std::ifstream& in, Continent& continent)
-    {
-        string temp;
-        char* buffer;
-       
-        in >> temp;
-        
-        buffer = strtok (const_cast<char*> (temp.c_str()), ";");
-        continent.name = buffer;
-        buffer = strtok (NULL, ";");
-        continent.ncountries = atoi(buffer);
-        continent.countries = new Country[continent.ncountries];
-        return in;
-    }
+    friend std::ifstream& operator>>(std::ifstream& in, Continent& continent);
+    friend std::ostream& operator<< (std::ostream& out, Continent& continent);
 };
 
-std::istream& operator>>(std::istream& in, Country& country);
 //void countries_func(Library lib);
 #endif
