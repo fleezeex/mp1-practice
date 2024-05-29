@@ -16,7 +16,7 @@ void continents_func(Library* Lib) {
         if (strcmp(Lib->continents[a].name, name) == 0) {
             flag = b;
             temp = Lib->continents[a].ncountries;
-            printf("Страны, входящие в состав страны: ");
+            printf("Страны, расположенные на материке: ");
             for (b = 0; b < Lib->continents[a].ncountries; b++) {
                 if (temp == 1) {
                     printf("%s. \n", Lib->continents[a].countries[b].name);
